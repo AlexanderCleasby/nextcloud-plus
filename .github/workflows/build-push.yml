@@ -19,6 +19,41 @@ jobs:
       contents: read
       packages: write
 
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - version: "30"
+            variant: apache
+            tags: |
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:30
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:30-apache
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:latest
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:apache
+          - version: "30"
+            variant: fpm
+            tags: |
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:30-fpm
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:fpm
+          - version: "29"
+            variant: apache
+            tags: |
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:29
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:29-apache
+          - version: "29"
+            variant: fpm
+            tags: |
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:29-fpm
+          - version: "28"
+            variant: apache
+            tags: |
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:28
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:28-apache
+          - version: "28"
+            variant: fpm
+            tags: |
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:28-fpm
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -33,22 +68,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: |
-            type=raw,value=latest
-            type=raw,value=30-apache
-            type=sha
-
       - name: Build and push image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          tags: ${{ matrix.tags }}
+          build-args: BASE_TAG=${{ matrix.version }}-${{ matrix.variant }}
+          cache-from: type=gha,scope=${{ matrix.version }}-${{ matrix.variant }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.version }}-${{ matrix.variant }}

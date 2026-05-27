@@ -1,4 +1,5 @@
-FROM nextcloud:30-apache
+ARG BASE_TAG=30-apache
+FROM nextcloud:${BASE_TAG}
 
 RUN set -ex; \
     apt-get update; \
