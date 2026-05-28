@@ -23,36 +23,36 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - version: "32"
+            variant: apache
+            tags: |
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:32
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:32-apache
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:latest
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:apache
+          - version: "32"
+            variant: fpm
+            tags: |
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:32-fpm
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:fpm
+          - version: "31"
+            variant: apache
+            tags: |
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:31
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:31-apache
+          - version: "31"
+            variant: fpm
+            tags: |
+              ghcr.io/alexandercleasby/nextcloud-ffmpeg:31-fpm
           - version: "30"
             variant: apache
             tags: |
               ghcr.io/alexandercleasby/nextcloud-ffmpeg:30
               ghcr.io/alexandercleasby/nextcloud-ffmpeg:30-apache
-              ghcr.io/alexandercleasby/nextcloud-ffmpeg:latest
-              ghcr.io/alexandercleasby/nextcloud-ffmpeg:apache
           - version: "30"
             variant: fpm
             tags: |
               ghcr.io/alexandercleasby/nextcloud-ffmpeg:30-fpm
-              ghcr.io/alexandercleasby/nextcloud-ffmpeg:fpm
-          - version: "29"
-            variant: apache
-            tags: |
-              ghcr.io/alexandercleasby/nextcloud-ffmpeg:29
-              ghcr.io/alexandercleasby/nextcloud-ffmpeg:29-apache
-          - version: "29"
-            variant: fpm
-            tags: |
-              ghcr.io/alexandercleasby/nextcloud-ffmpeg:29-fpm
-          - version: "28"
-            variant: apache
-            tags: |
-              ghcr.io/alexandercleasby/nextcloud-ffmpeg:28
-              ghcr.io/alexandercleasby/nextcloud-ffmpeg:28-apache
-          - version: "28"
-            variant: fpm
-            tags: |
-              ghcr.io/alexandercleasby/nextcloud-ffmpeg:28-fpm
 
     steps:
       - name: Checkout repository

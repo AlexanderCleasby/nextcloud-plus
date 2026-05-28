@@ -6,12 +6,12 @@ Nextcloud Docker images with FFmpeg pre-installed. Built on top of the official 
 
 | Tag | Base Image |
 |-----|-----------|
-| `30`, `30-apache`, `latest`, `apache` | `nextcloud:30-apache` |
-| `30-fpm`, `fpm` | `nextcloud:30-fpm` |
-| `29`, `29-apache` | `nextcloud:29-apache` |
-| `29-fpm` | `nextcloud:29-fpm` |
-| `28`, `28-apache` | `nextcloud:28-apache` |
-| `28-fpm` | `nextcloud:28-fpm` |
+| `32`, `32-apache`, `latest`, `apache` | `nextcloud:32-apache` |
+| `32-fpm`, `fpm` | `nextcloud:32-fpm` |
+| `31`, `31-apache` | `nextcloud:31-apache` |
+| `31-fpm` | `nextcloud:31-fpm` |
+| `30`, `30-apache` | `nextcloud:30-apache` |
+| `30-fpm` | `nextcloud:30-fpm` |
 
 ## Usage
 
@@ -24,7 +24,7 @@ Or in a `docker-compose.yml`:
 ```yaml
 services:
   nextcloud:
-    image: ghcr.io/alexandercleasby/nextcloud-ffmpeg:30-apache
+    image: ghcr.io/alexandercleasby/nextcloud-ffmpeg:32-apache
     ports:
       - "8080:80"
 ```
@@ -34,12 +34,12 @@ For use with a separate web server (nginx, caddy, etc.), use the `fpm` variant:
 ```yaml
 services:
   nextcloud:
-    image: ghcr.io/alexandercleasby/nextcloud-ffmpeg:30-fpm
+    image: ghcr.io/alexandercleasby/nextcloud-ffmpeg:32-fpm
 ```
 
 ## Rebuild Schedule
 
-Images are rebuilt weekly (Monday 04:00 UTC) to pick up security updates and patch releases from the upstream Nextcloud base images. Since the tags use major versions (e.g. `nextcloud:30-apache`), new patch releases are incorporated automatically without code changes.
+Images are rebuilt weekly (Monday 04:00 UTC) to pick up security updates and patch releases from the upstream Nextcloud base images. Since the tags use major versions (e.g. `nextcloud:32-apache`), new patch releases are incorporated automatically without code changes.
 
 ## Verification
 
